@@ -1,0 +1,109 @@
+    <Worksheet ss:Name="Hoja2">
+	<Table ss:ExpandedColumnCount="5" x:FullColumns="1"
+	   x:FullRows="1" ss:DefaultColumnWidth="60" ss:DefaultRowHeight="15">
+	   <Column ss:AutoFitWidth="0" ss:Width="14.25"/>
+	   <Column ss:AutoFitWidth="0" ss:Width="114.75"/>
+	   <Column ss:AutoFitWidth="0" ss:Width="25.5"/>
+	   <Column ss:AutoFitWidth="0" ss:Width="27.75"/>
+	   <Column ss:AutoFitWidth="0" ss:Width="26.25"/>
+           <Row ss:AutoFitHeight="0" ss:Height="123.75">
+                                            <Cell ss:StyleID="s72"/>
+                                            <Cell />
+                                            <Cell ss:StyleID="s65"><Data ss:Type="String">Reprovado</Data></Cell>
+                                            <Cell ss:StyleID="s65"><Data ss:Type="String">Aprovado con Asig Pend</Data></Cell>
+                                            <Cell ss:StyleID="s65"><Data ss:Type="String">Aprovado</Data></Cell>
+                               </Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Julio Cesar  Betances Salazar</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String">X</Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Mattia  Botticelli</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Eslaine Angelica Campos Gil</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Lisbeth Adelaine Cruz Hilario</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Pabel  Diaz Mercedes</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Miguel  Alfonso Espinal</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Darlinson  Hilario Contreras</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String">X</Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Lizbeth  Jerez Tejada</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Julio Elias Marmolejos Pichardo</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Silvianny Altagracia Ozoria Gelabert</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String">X</Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Francheska Margarita Perez Ramirez</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Rayniela  Polonia Hiciano</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Junior Rafael Ruiz Belen</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String">X</Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Angela Jamilka Santos Mota</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Yeniffer  Maria Vasquez Almonte</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Jesus  Rafael Ventura Mosquea</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Claudine Arlette Lantigua Flores</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Dania Maria Roque Osorio</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell></Row><Row ss:AutoFitHeight="0">
+                                        <Cell ss:StyleID="s73"/>
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">Francis Manuel Alvarado Cruz</Data></Cell><Cell ss:StyleID="s73"><Data ss:Type="String"></Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String">X</Data></Cell>
+					<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell></Row>
+	</Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+      <PageSetup>
+       <Header x:Margin="0.3"/>
+       <Footer x:Margin="0.3"/>
+       <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+      </PageSetup>
+      <Unsynced/>
+      <Panes>
+       <Pane>
+        <Number>3</Number>
+        <RangeSelection>R1:R1048576</RangeSelection>
+       </Pane>
+      </Panes>
+      <ProtectObjects>False</ProtectObjects>
+      <ProtectScenarios>False</ProtectScenarios>
+     </WorksheetOptions>
+ </Worksheet>
