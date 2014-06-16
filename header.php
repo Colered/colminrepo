@@ -3,6 +3,7 @@ session_start();
 $lang = isset($_GET['lang']) ? $_GET['lang']: "es";
 require_once('lang/'.$lang.'.php');
 require_once('common.php');
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,7 +13,7 @@ require_once('common.php');
 <link type="text/css" rel="stylesheet"  href="css/style.css" />
 <link type="text/css" rel="stylesheet"  href="css/jquery-ui.css" />
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" > 
+<script type="text/javascript" >
 //define dynamic error message variables for jquery
 	var lang_schReq='<?php echo  $lang_schReq; ?>';
 	var lang_accTknReq='<?php echo $lang_accTknReq; ?>';
@@ -25,7 +26,7 @@ require_once('common.php');
 	var lang_stpTwoParentDate='<?php echo $lang_stpTwoParentDate; ?>';
 	var lang_examGrpReq='<?php echo $lang_examGrpReq; ?>';
 	var lang_subReqParent='<?php echo $lang_subReqParent; ?>';
-	
+
 	var lang_backButton='<?php echo $lang_backButton; ?>';
 	var lang_proceedButton='<?php echo $lang_proceedButton; ?>';
 	var lang_stpblw3ParentErr='<?php echo $lang_stpblw3ParentErr; ?>';
