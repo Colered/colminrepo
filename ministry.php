@@ -3,7 +3,7 @@ require_once('header.php');
 ?>
 <div id="page">
     <div id="wrapper">
-        <form action="report.php" method="post" id="multiForm">
+        <form action="" method="post" id="multiForm">
 		  <input type="hidden" name="lang" id="lang" value="<?php echo $lang;?>" />
             <div id="slider">
                 <!--step 1 for ministry form-->
@@ -123,7 +123,7 @@ require_once('header.php');
                             <select name="class_level" id="class_level"  class="errorDisplay" onchange="getShowHideSub();">
                                 <option value=""><?php echo $lang_slctlevel; ?></option>
                                 <?php
-                                for ($i = 0; $i < count($allLevelsMinistry); $i++) {
+                                for ($i = 0; $i < count($allLevelsMinistry); $i++){
                                     ?>
                                     <option value="<?php echo $allLevelsMinistry[$i]; ?>"><?php echo $allLevelsMinistry[$i]; ?></option>
                                     <?php
@@ -163,7 +163,7 @@ require_once('header.php');
 					<div class="rowleft">
 						<div class="form-text"><?php echo $lang_semOne; ?></div>
 						<?php
-						for ($i = 0; $i < count($curcesLevelsNineSemOne); $i++) {
+						for ($i = 0; $i < count($curcesLevelsNineSemOne); $i++){
 							?>
 							 <div class="leble-name" id="sem1Regular"><?php echo $curcesLevelsNineSemOne[$i]; ?>*</div>
 							<div class="leble-name" id="sem1Technical"><?php echo $techSubNineSemOne[$i]; ?>*</div>
@@ -179,7 +179,7 @@ require_once('header.php');
 					<div class="rowright">
 						<div class="form-text"><?php echo $lang_semTwo;?></div>
 						<?php
-						for ($i = 0; $i < count($curcesLevelsNineSemTwo); $i++) {
+						for ($i = 0; $i < count($curcesLevelsNineSemTwo); $i++){
 							?>
 							<div class="leble-name"  id="sem2Regular"><?php echo $curcesLevelsNineSemTwo[$i]; ?>*</div>
 							<div class="leble-name"  id="sem2Technical"><?php echo $techSubNineSemTwo[$i]; ?>*</div>
@@ -188,7 +188,7 @@ require_once('header.php');
 									<option value=" "><?php echo $lang_slctSub; ?></option>
 								</select>
 							</div>
-							<?php
+						<?php
 						}
 						?>
 					</div>
@@ -197,7 +197,7 @@ require_once('header.php');
 					<div class="rowleft">
 						<div class="form-text"><?php echo $lang_semOne; ?></div>
 						<?php
-						for ($i = 0; $i < count($curcesLevelsTenSemOne); $i++) {
+						for ($i = 0; $i < count($curcesLevelsTenSemOne); $i++){
 							?>
 							<div class="leble-name" id="sem1Regular"><?php echo $curcesLevelsTenSemOne[$i]; ?>*</div>
 							<div class="leble-name" id="sem1Technical"><?php echo $techSubTenSemOne[$i]; ?>*</div>
@@ -213,7 +213,7 @@ require_once('header.php');
 					<div class="rowright">
 						<div class="form-text"><?php echo $lang_semTwo;?></div>
 						<?php
-						for ($i = 0; $i < count($curcesLevelsTenSemTwo); $i++) {
+						for ($i = 0; $i < count($curcesLevelsTenSemTwo); $i++){
 							?>
 							<div class="leble-name"  id="sem2Regular"><?php echo $curcesLevelsTenSemTwo[$i]; ?>*</div>
 							<div class="leble-name"  id="sem2Technical"><?php echo $techSubTenSemTwo[$i]; ?>*</div>
@@ -231,7 +231,7 @@ require_once('header.php');
 					<div class="rowleft">
 						<div class="form-text"><?php echo $lang_semOne; ?></div>
 						<?php
-						for ($i = 0; $i < count($curcesLevelsElevenSemOne); $i++) {
+						for ($i = 0; $i < count($curcesLevelsElevenSemOne); $i++){
 							?>
 							<div class="leble-name" id="sem1Regular"><?php echo $curcesLevelsElevenSemOne[$i]; ?>*</div>
 							<div class="leble-name" id="sem1Technical"><?php echo $techSubElevenSemOne[$i]; ?>*</div>
@@ -247,7 +247,7 @@ require_once('header.php');
 					<div class="rowright">
 						<div class="form-text"><?php echo $lang_semTwo;?></div>
 						<?php
-						for ($i = 0; $i < count($curcesLevelsElevenSemTwo); $i++) {
+						for ($i = 0; $i < count($curcesLevelsElevenSemTwo); $i++){
 							?>
 							<div class="leble-name"  id="sem2Regular"><?php echo $curcesLevelsElevenSemTwo[$i]; ?>*</div>
 							<div class="leble-name"  id="sem2Technical"><?php echo $techSubElevenSemTwo[$i]; ?>*</div>
@@ -352,4 +352,3 @@ require_once('header.php');
 </div>
 <?php require_once('common_ministry.php'); ?>
 <?php require_once('footer.php'); ?>
-

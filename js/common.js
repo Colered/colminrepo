@@ -1,4 +1,3 @@
-//$(window).load(function() {  $("#rhino-item1, #rhino-item1, #rhino-item1").hide(); });
 $(document).ready(function() {
     $('#slider').rhinoslider({
         controlsPlayPause: false,
@@ -220,7 +219,7 @@ var step2_validation = function() {
         $(".rhino-active-bullet").removeClass("step-error").addClass("step-success");
         $(".rhino-next").show();
         $('.form-submit').hide();
-		$("#class_level").prop("selectedIndex", 0);
+		//$("#class_level").prop("selectedIndex", 0);
         $('.rhino-next').trigger('click');
     } else {
         $(".rhino-active-bullet").removeClass("step-success").addClass("step-error");
@@ -267,7 +266,8 @@ var step3_validation = function() {
 		}
 		//trigger to next step
          if($('.rhino-next').trigger('click'))
-		{  
+		{   
+		   // alert('yes');
 		    var $ministryDiv=$('#ministry_report');
 		    if($ministryDiv.length){
 			 errorMinstryStep4();
@@ -411,10 +411,13 @@ var step5_validation = function() {
 		var $parentDiv = $('#parentReport');
 		if($parentDiv.length){
 		   $('.form-submit').show();
-		   $("#rhino-item0,#rhino-item1, #rhino-item2, #rhino-item3, #rhino-item4,#rhino-item6").hide();
+		   $("#rhino-item0,#rhino-item1, #rhino-item2, #rhino-item3, #rhino-item4,#rhino-item6,.rhino-prev").hide();
 		}else{
 		   $('.form-submit').hide();
-		   if($('#multiForm').submit()){
+		   if($('#multiForm').attr('action', "report.php").submit()){
+			$('.show-hide-loading').show(); 
+			$('.show-download').hide();
+			$(".rhino-prev").hide();
 			$(".loading-img").show();
 			$(".infotext").show();
 	     }
@@ -653,7 +656,7 @@ function mapSubjects() {
 			$tempPercentage = 0;
 			$("#9ss" + $i +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(countLev9Sem1Val[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -666,7 +669,7 @@ function mapSubjects() {
 			$tempPercentage = 0;
 			$('#9s2s' + $i +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(countLev9Sem2Val[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -682,7 +685,7 @@ function mapSubjects() {
 			$tempPercentage = 0;
 			$("#10ss" + $i +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(countLev10Sem1Val[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -695,7 +698,7 @@ function mapSubjects() {
 			$tempPercentage = 0;
 			$('#10s2s' + $i +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(countLev10Sem2Val[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -711,7 +714,7 @@ function mapSubjects() {
 			$tempPercentage = 0;
 			$("#11ss" + $i +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(countLev11Sem1Val[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -724,7 +727,7 @@ function mapSubjects() {
 			$tempPercentage = 0;
 			$('#11s2s' + $i +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(countLev11Sem2Val[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -740,7 +743,7 @@ function mapSubjects() {
 			$tempPercentage = 0;
 			$("#12ss" + $i +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(countLev12Sem1Val[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -753,7 +756,7 @@ function mapSubjects() {
 			$tempPercentage = 0;
 			$('#12s2s' + $i +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(countLev12Sem2Val[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -774,7 +777,7 @@ function mapExamGroup(){
 			$tempPercentage = 0;
 			$("#s1e" + $count +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(examGroupMapSem1[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -788,7 +791,7 @@ function mapExamGroup(){
 			$tempPercentage = 0;
 			$('#s2e' + $countS2 +' option').each(function(){
 				$matchedPercent = similar_text($.trim($(this).text()), $.trim(examGroupMapSem2[$i]), 1);
-				if($matchedPercent>=40){
+				if($matchedPercent>=70){
 					if($matchedPercent > $tempPercentage){
 						$tempPercentage = $matchedPercent;
 						$(this).attr("selected", "selected");
@@ -830,8 +833,10 @@ $(document).ready(function() {
 });
 setInterval(function(){
   if ($.cookie("fileDownload")) {
+	  
     $(".show-download").show();
 	$(".show-hide-loading").hide();
+	$(".rhino-prev").show();
 	$.removeCookie('fileDownload', { path: '/' });
   }
 },1000);
@@ -843,7 +848,6 @@ setInterval(function(){
 	$.removeCookie('fileDownloadParent', { path: '/' });
   }
 },1000);
-
 function similar_text(first, second, percent) {
   if (first === null || second === null || typeof first === 'undefined' || typeof second === 'undefined') {
     return 0;
@@ -1142,7 +1146,9 @@ $(document).ready(function() {
 $(document).ready(function () {
 (function () {
 $('#clicktovalidate').on("click",function() {
-  $('.last-form').wrap('<form  name="validationSheetForm" id="validationSheetForm" action="report_to_validate.php" method="post"></form>');
+	$('#multiForm').attr('action', "report_to_validate.php").submit();
+	return true;
+    //$('.last-form').wrap('<form  name="validationSheetForm" id="validationSheetForm" action="report_to_validate.php" method="post"></form>');
 });
 })();
 //hide the proceed button on index page	
@@ -1222,24 +1228,37 @@ $(document).ready(function() {
 		});
 	});
 });
-function errorMinstryStep4(){				   
+function errorMinstryStep4(){
   var counterVal = parseInt(0); var counterValtwo = parseInt(0); var idForsem1 = ''; var idForsem2 = '';
 	if (($('#class_level :selected').val()) == 9) {
+		$('.sublevel10').prop('selectedIndex',0);
+		$('.sublevel11').prop('selectedIndex',0);
+		$('.sublevel12').prop('selectedIndex',0);
+		
 		var counterVal = parseInt($('#countLev9Sem1').text());
 		var counterValtwo = parseInt($('#countLev9Sem2').text());
 		var idForsem1 = '#9ss';
 		var idForsem2 = '#9s2s';
     }else if (($('#class_level :selected').val()) == 10) {
+		$('.sublevel9').prop('selectedIndex',0);
+		$('.sublevel11').prop('selectedIndex',0);
+		$('.sublevel12').prop('selectedIndex',0);
 		var counterVal = parseInt($('#countLev10Sem1').text());
 		var counterValtwo = parseInt($('#countLev10Sem2').text());
 		var idForsem1 = '#10ss';
 		var idForsem2 = '#10s2s';
     }else if (($('#class_level :selected').val()) == 11) {
+		$('.sublevel9').prop('selectedIndex',0);
+		$('.sublevel10').prop('selectedIndex',0);
+		$('.sublevel12').prop('selectedIndex',0);
 		var counterVal = parseInt($('#countLev11Sem1').text());
 		var counterValtwo = parseInt($('#countLev11Sem2').text());
 		var idForsem1 = '#11ss';
 		var idForsem2 = '#11s2s';
     }else if (($('#class_level :selected').val()) == 12) {
+		$('.sublevel9').prop('selectedIndex',0);
+		$('.sublevel10').prop('selectedIndex',0);
+		$('.sublevel11').prop('selectedIndex',0);
 		var counterVal = parseInt($('#countLev12Sem1').text());
 		var counterValtwo = parseInt($('#countLev12Sem2').text());
 		var idForsem1 = '#12ss';
