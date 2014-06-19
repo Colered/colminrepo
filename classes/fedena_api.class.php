@@ -1,55 +1,51 @@
 <?php
-
 class Fedena_Data {
-
-    public static $base_url = 'http://reporteminerd.colered.edu.do';
-    private $sem1_ExamCounts;
+	public static $base_url = 'http://reporteminerd.colered.edu.do';
+	private $sem1_ExamCounts;
     private $sem2_ExamCounts;
     private $langVar = array();
-
     public function __construct($varValArr = array()) {
         $this->langVar = $varValArr;
     }
-
     public function createCsv($subject_countsArr, $reportTitleArr, $totalWorkingDay, $exam_countArr) {
         $this->sem1_ExamCounts = $exam_countArr['sem1_ExamCounts'];
         $this->sem2_ExamCounts = $exam_countArr['sem2_ExamCounts'];
-        if (isset($_POST['schoolUrl']) && (trim($_POST['schoolUrl']) != '') && trim($_POST['accsssToken']) != '') {
-            $course = trim($_POST['courses']);
-            $coursearrName = explode("#", $course);
-            $course = $this->convert_to_utf8(trim($coursearrName[0]));
-            $sclURL = trim($_POST['schoolUrl']);
-            $accToken = trim($_POST['accsssToken']);
-            $centerName = (isset($_POST['centerName'])) ? $this->convert_to_utf8(trim($_POST['centerName'])) : '';
-            $deirectionReasonal = (isset($_POST['regionalAdd'])) ? $this->convert_to_utf8(trim($_POST['regionalAdd'])) : '';
-            $schShift = (isset($_POST['school_shift'])) ? $this->convert_to_utf8(trim($_POST['school_shift'])) : '';
-            $schSector = (isset($_POST['school_sector'])) ? $this->convert_to_utf8(trim($_POST['school_sector'])) : '';
-            $area = (isset($_POST['school_area'])) ? $this->convert_to_utf8(trim($_POST['school_area'])) : '';
-            $distEdu = (isset($_POST['eduDist'])) ? $this->convert_to_utf8(trim($_POST['eduDist'])) : '';
-            $codiCent = (isset($_POST['centerCode'])) ? $this->convert_to_utf8(trim($_POST['centerCode'])) : '';
-            $school_year = (isset($_POST['school_year'])) ? $this->convert_to_utf8(trim($_POST['school_year'])) : '';
-            $batchName = (isset($_POST['batchName'])) ? $this->convert_to_utf8(trim($_POST['batchName'])) : '';
-            $sem1_subjectArr = (isset($_POST['s1s'])) ? $_POST['s1s'] : '';
-            $sem2_subjectArr = (isset($_POST['s2s'])) ? $_POST['s2s'] : '';
-            $sem1_examsArr = (isset($_POST['s1e'])) ? $_POST['s1e'] : '';
-            $sem2_examsArr = (isset($_POST['s2e'])) ? $_POST['s2e'] : '';
-            $batchStartDate = (isset($_POST['batchStartDate'])) ? $_POST['batchStartDate'] : '';
-            $batchEndDate = (isset($_POST['batchEndDate'])) ? $_POST['batchEndDate'] : '';
-            if (isset($_POST['class_level'])) {
-                $class_level = trim($_POST['class_level']);
-                $totalWorkingDay = $totalWorkingDay[$class_level];
-            }
-            // reform subjects snd exams arrays
-            $sem1_subjectArrNew = $this->formingArray($sem1_subjectArr);
-            $sem2_subjectArrNew = $this->formingArray($sem2_subjectArr);
-            $sem1_examsArrNew = $this->formingArray($sem1_examsArr);
-            $sem2_examsArrNew = $this->formingArray($sem2_examsArr);
-            // end reform
-        } else {
-            $_SESSION['errorMess'] = $this->langVar['lang_postErr'];
-            header("Location:index.php");
-            exit();
-        }
+		if (isset($_POST['schoolUrl']) && (trim($_POST['schoolUrl']) != '') && trim($_POST['accsssToken']) != '') {
+			$course = $_POST['courses'];
+			$coursearrName = explode("#", $course);
+			$course = $this->convert_to_utf8($coursearrName[0]);
+			$sclURL = trim($_POST['schoolUrl']);
+			$accToken = trim($_POST['accsssToken']);
+			$centerName = (isset($_POST['centerName'])) ? $this->convert_to_utf8(trim($_POST['centerName'])) : '';
+			$deirectionReasonal = (isset($_POST['regionalAdd'])) ? $this->convert_to_utf8(trim($_POST['regionalAdd'])) : '';
+			$schShift = (isset($_POST['school_shift'])) ? $this->convert_to_utf8(trim($_POST['school_shift'])) : '';
+			$schSector = (isset($_POST['school_sector'])) ? $this->convert_to_utf8(trim($_POST['school_sector'])) : '';
+			$area = (isset($_POST['school_area'])) ? $this->convert_to_utf8(trim($_POST['school_area'])) : '';
+			$distEdu = (isset($_POST['eduDist'])) ? $this->convert_to_utf8(trim($_POST['eduDist'])) : '';
+			$codiCent = (isset($_POST['centerCode'])) ? $this->convert_to_utf8(trim($_POST['centerCode'])) : '';
+			$school_year = (isset($_POST['school_year'])) ? $this->convert_to_utf8(trim($_POST['school_year'])) : '';
+			$batchName = (isset($_POST['batchName'])) ? $this->convert_to_utf8($_POST['batchName']) : '';
+			$sem1_subjectArr = (isset($_POST['s1s'])) ? $_POST['s1s'] : '';
+			$sem2_subjectArr = (isset($_POST['s2s'])) ? $_POST['s2s'] : '';
+			$sem1_examsArr = (isset($_POST['s1e'])) ? $_POST['s1e'] : '';
+			$sem2_examsArr = (isset($_POST['s2e'])) ? $_POST['s2e'] : '';
+			$batchStartDate = (isset($_POST['batchStartDate'])) ? $_POST['batchStartDate'] : '';
+			$batchEndDate = (isset($_POST['batchEndDate'])) ? $_POST['batchEndDate'] : '';
+			if (isset($_POST['class_level'])) {
+				$class_level = trim($_POST['class_level']);
+				$totalWorkingDay = $totalWorkingDay[$class_level];
+			}
+			// reform subjects snd exams arrays
+			$sem1_subjectArrNew = $this->formingArray($sem1_subjectArr);
+			$sem2_subjectArrNew = $this->formingArray($sem2_subjectArr);
+			$sem1_examsArrNew = $this->formingArray($sem1_examsArr);
+			$sem2_examsArrNew = $this->formingArray($sem2_examsArr);
+			// end reform
+		} else {
+			$_SESSION['errorMess'] = $this->langVar['lang_postErr'];
+			header("Location:index.php");
+			exit();
+		}
         $txt1 = file_get_contents('report_header.xml');
         $txt1 = str_replace("_NAME_OF_CENTER_", $centerName, $txt1);
         $txt1 = str_replace("_REGIONAL_ADDRESS_", $deirectionReasonal, $txt1);
@@ -110,7 +106,7 @@ class Fedena_Data {
         $arrayValue = array("sclURL" => $sclURL, "accToken" => $accToken, "batch" => $batchName, "course" => $course, "totalWorkingDay" => $totalWorkingDay, "batchStartDate" => $batchStartDate, "batchEndDate" => $batchEndDate);
         $studentsArr = $this->getStudents($arrayValue);
         $marksArr = $this->getAllSubjectMarksByExamGroup($arrayValue, $sem1_examsArrNew, $sem2_examsArrNew);
-        $marksRows = $this->getStudentMarksRow($studentsArr, $marksArr, $arrayValue, $sem1_subjectArrNew, $sem2_subjectArrNew, $sem1_examsArrNew, $sem2_examsArrNew);
+		$marksRows = $this->getStudentMarksRow($studentsArr, $marksArr, $arrayValue, $sem1_subjectArrNew, $sem2_subjectArrNew, $sem1_examsArrNew, $sem2_examsArrNew);
         file_put_contents('report_content.xml', $marksRows);
         $txt1 .= "\n" . file_get_contents('report_content.xml');
         $txt1 .= "\n" . file_get_contents('report_footer.xml');
@@ -184,40 +180,42 @@ class Fedena_Data {
         if (fwrite($fp_detail, $detail) === false)
             die('Could not write to detail xml file.');
         //convert the xml file to xlsx file
-        require_once $_SERVER['DOCUMENT_ROOT'] . "/cidotnew/classes/PHPExcel.php";
-        $inputFileName = $_SERVER['DOCUMENT_ROOT'] . "/cidotnew/student_report.xml";
-        $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-        $objPHPExcel = $objReader->load($inputFileName);
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        //code to insert the logo image
-        $objDrawing = new PHPExcel_Worksheet_Drawing();
-        $objDrawing->setName('PHPExcel logo');
-        $objDrawing->setDescription('PHPExcel logo');
-        $objDrawing->setPath('./images/ministry-logo.png');
-        $objDrawing->setHeight(115);
-        $pos = PHPExcel_Cell::stringFromColumnIndex($imgindex);
-        $endPosVertixalCell = PHPExcel_Cell::stringFromColumnIndex($verticalEndRow);
-        $finalVerticalRows = $verticalStartRow . ':' . $endPosVertixalCell . '17';
-        $objDrawing->setCoordinates($pos . '2');
-        $objPHPExcel->setActiveSheetIndex(0);
-        $objPHPExcel->getActiveSheet()->getStyle($finalVerticalRows)->getAlignment()->setTextRotation(90);
-        $objPHPExcel->getActiveSheet()->getStyle($finalVerticalRows)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_BOTTOM);
-        $objPHPExcel->getActiveSheet()->getStyle("B14:C14")->getBorders()->getTop()->setBorderStyle(true);
-        $objPHPExcel->getActiveSheet()->getStyle("B14:B16")->getBorders()->getLeft()->setBorderStyle(true);
-        $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
-        $objWriter->save(str_replace('.php', '.xlsx', __FILE__));
-        header("Content-Type: application/xlsx;");
-        header('Set-Cookie: fileDownload=1; path=/');
-        header("Content-Disposition: attachment;Filename=fedena-reports.xlsx");
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        $objWriter->save('php://output');
+		require_once $_SERVER['DOCUMENT_ROOT']."/cidotnew/classes/PHPExcel.php";
+		$inputFileName = $_SERVER['DOCUMENT_ROOT']."/cidotnew/student_report.xml";
+		$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+		$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+		$objPHPExcel = $objReader->load($inputFileName);
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+		//code to insert the logo image
+		$objDrawing = new PHPExcel_Worksheet_Drawing();
+		$objDrawing->setName('PHPExcel logo');
+		$objDrawing->setDescription('PHPExcel logo');
+		$objDrawing->setPath('./images/ministry-logo.png');
+		$objDrawing->setHeight(115);
+		$pos = PHPExcel_Cell::stringFromColumnIndex($imgindex);
+		$endPosVertixalCell = PHPExcel_Cell::stringFromColumnIndex($verticalEndRow);
+		$finalVerticalRows = $verticalStartRow . ':' . $endPosVertixalCell . '17';
+		$objDrawing->setCoordinates($pos . '2');
+		$objPHPExcel->setActiveSheetIndex(0);
+		$objPHPExcel->getActiveSheet()->getStyle($finalVerticalRows)->getAlignment()->setTextRotation(90);
+		$objPHPExcel->getActiveSheet()->getStyle($finalVerticalRows)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_BOTTOM);
+		$objPHPExcel->getActiveSheet()->getStyle("B14:C14")->getBorders()->getTop()->setBorderStyle(true);
+		$objPHPExcel->getActiveSheet()->getStyle("B14:B16")->getBorders()->getLeft()->setBorderStyle(true);
+		$objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
+		//$objWriter->save(str_replace('.php', '.xlsx', __FILE__));
+		//header("Content-Type: application/xlsx;");
+		ob_end_clean();
+		header('Content-type: application/vnd.ms-excel');
+		header('Set-Cookie: fileDownload=1; path=/');
+		header("Content-Disposition: attachment;Filename=fedena-reports.xlsx");
+		//$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+		$objWriter->save('php://output');
     }
 
-    /**
-     * function to get students list
-     * @return all the student list from the fedena api in a given course and batch.
-     */
+	/**
+	 * function to get students list
+	 * @return all the student list from the fedena api in a given course and batch.
+	 */
     public function getStudents($arrayValue) {
         $url = $arrayValue['sclURL'] . '/api/students?access_token=' . $arrayValue['accToken'] . '&search[batch_course_code_equals]=' . $arrayValue['course'] . '&search[batch_name_equals]=' . $arrayValue['batch'];
         $xmlinfo = $this->fedenaconnect($url);
@@ -228,10 +226,9 @@ class Fedena_Data {
         }
         return $xmlinfo;
     }
-
-    /**
-     * function to get students rows and their marks in ministry report
-     */
+	/**
+	 * function to get students rows and their marks in ministry report
+	 */
     public function getStudentMarksRow($studentsArr, $marks, $arrayValue, $sem1_subjectArr, $sem2_subjectArr, $sem1_examsArr, $sem2_examsArr) {
         try {
             $marksRows = '';
@@ -263,13 +260,12 @@ class Fedena_Data {
             exit();
         }
     }
-
-    /**
-     * function to get students rows and their marks in verification detail xml file
-     * write the retrieved data into xml file.
-     */
+	/**
+	 * function to get students rows and their marks in verification detail xml file
+	 * write the retrieved data into xml file.
+	 */
     public function getStudentMarksRowDetail($studentsArr, $marks, $arrayValue, $sem1_subjectArr, $sem2_subjectArr, $sem1_examsArr, $sem2_examsArr) {
-        try {
+		try {
             $marksRows = '';
             $secondSheetData = '<Row ss:AutoFitHeight="0" ss:Height="123.75">
                                             <Cell ss:StyleID="s72"/>
@@ -341,11 +337,11 @@ class Fedena_Data {
     }
 
     /**
-     * function to get the exam marks array for both the semister
-     * @return marks array for all the user selected exams .
-     */
+	 * function to get the exam marks array for both the semister
+	 * @return marks array for all the user selected exams .
+	 */
     public function getAllSubjectMarksByExamGroup($arrayValue, $examsArr_sem1, $examsArr_sem2) {
-        $markArr = array();
+	    $markArr = array();
         // exam score for sem1
         if ($this->sem1_ExamCounts == count($examsArr_sem1)) {
             $sem1_counts = count($examsArr_sem1) - 1;
@@ -359,24 +355,23 @@ class Fedena_Data {
         }
         // exam score for sem1
         for ($z = 0; $z < $sem1_counts; $z++) {
-            $exam_name = trim($examsArr_sem1[$z]);
+            $exam_name = $examsArr_sem1[$z];
             if ($exam_name <> "") {
                 $socreArr = $this->getExamScoreGroup($arrayValue, $exam_name);
                 for ($i = 0; $i < count($socreArr->exam_score); $i++) {
                     $rollNo = trim($socreArr->exam_score[$i]->student);
                     for ($j = 0; $j < count($socreArr->exam_score); $j++) {
                         if ($rollNo == trim($socreArr->exam_score[$j]->student)) {
-                            $examGrp = trim($socreArr->exam_score[$j]->exam_group);
-                            $subject = trim($socreArr->exam_score[$j]->subject);
-                            $markArr[$rollNo][$examGrp][$subject] = $socreArr->exam_score[$j]->marks;
+                              $examGrp = trim($socreArr->exam_score[$j]->exam_group);
+                              $subject = trim($socreArr->exam_score[$j]->subject);
+                              $markArr[$rollNo][$examGrp][$subject] = $socreArr->exam_score[$j]->marks;
                         }
                     }
                 }
             }
         }
-        // exam score for sem2
         for ($z = 0; $z < $sem2_counts; $z++) {
-            $exam_name = trim($examsArr_sem2[$z]);
+            $exam_name = $examsArr_sem2[$z];
             if ($exam_name <> "") {
                 $socreArr = $this->getExamScoreGroup($arrayValue, $exam_name);
                 for ($i = 0; $i < count($socreArr->exam_score); $i++) {
@@ -391,110 +386,113 @@ class Fedena_Data {
                 }
             }
         }
-        return $markArr;
+		return $markArr;
     }
 
     /**
-     * function to get final result status of the main ministry report xlsx sheet
-     * @return a final column for the xml sheet with grade status.
-     */
-    public function getFinalStatus($marks, $sem1_subjectArr, $sem2_subjectArr, $examsArr_sem1, $examsArr_sem2, $arrayValue) {
+	 * function to get final result status of the main ministry report xlsx sheet
+	 * @return a final column for the xml sheet with grade status.
+	 */
+    public function getFinalStatus($marks, $sem1_subjectArr, $sem2_subjectArr, $examsArr_sem1, $examsArr_sem2, $arrayValue)
+    {
         $datarow = '';
         $reprobado_flag = '';
         $aprovado_asig_pend_flag = '';
         $aprovado_flag = '';
         $absent = $this->getAttendance($arrayValue);
-        // check for fail in cuurent year
-        $failCnt_current = 0;
-        $failCnt_current = $this->getFailCount($marks, $sem1_subjectArr, $examsArr_sem1, $arrayValue, $failCnt_current);
-        $failCnt_current = $this->getFailCount($marks, $sem2_subjectArr, $examsArr_sem2, $arrayValue, $failCnt_current);
+		// check for fail in cuurent year
+		$failCnt_current = 0;
+		$failCnt_current = $this->getFailCount($marks, $sem1_subjectArr, $examsArr_sem1, $arrayValue, $failCnt_current);
+		$failCnt_current = $this->getFailCount($marks, $sem2_subjectArr, $examsArr_sem2, $arrayValue, $failCnt_current);
 
-        //check for fail in prior year
-        $pass_in_sem1 = 1;
-        $pass_in_sem1 = $this->getFailCountPriorYear($arrayValue, $examsArr_sem1[7]);
+		//check for fail in prior year
+		$pass_in_sem1 = 1;
+		$pass_in_sem1 = $this->getFailCountPriorYear($arrayValue, $examsArr_sem1[7]);
 
-        $pass_in_sem2 = 1;
-        $pass_in_sem2 = $this->getFailCountPriorYear($arrayValue, $examsArr_sem2[7]);
+		$pass_in_sem2 = 1;
+		$pass_in_sem2 = $this->getFailCountPriorYear($arrayValue, $examsArr_sem2[7]);
 
-        if ($absent > 20 || $failCnt_current > 2 || (($pass_in_sem1 == 0) && ($pass_in_sem2 == 0))) {
-            $reprobado_flag = 'X';
-        } else if ($absent <= 20 && (($pass_in_sem1 == 1) || ($pass_in_sem2 == 1)) && ($failCnt_current == 1 || $failCnt_current == 2)) {
-            $aprovado_asig_pend_flag = 'X';
-        } else if ($absent <= 20 && (($pass_in_sem1 == 1) || ($pass_in_sem2 == 1)) && ($failCnt_current == 0)) {
-            $aprovado_flag = 'X';
-        }
+		if ($absent > 20 || $failCnt_current > 2 || (($pass_in_sem1 == 0) && ($pass_in_sem2 == 0))) {
+			$reprobado_flag = 'X';
+		} else if ($absent <= 20 && (($pass_in_sem1 == 1) || ($pass_in_sem2 == 1)) && ($failCnt_current == 1 || $failCnt_current == 2)) {
+			$aprovado_asig_pend_flag = 'X';
+		} else if ($absent <= 20 && (($pass_in_sem1 == 1) || ($pass_in_sem2 == 1)) && ($failCnt_current == 0)) {
+			$aprovado_flag = 'X';
+		}
 
         $datarow .= '<Cell ss:StyleID="s154"><Data ss:Type="String">' . $reprobado_flag . '</Data></Cell>
                 <Cell ss:StyleID="s161"><Data ss:Type="String">' . $aprovado_asig_pend_flag . '</Data></Cell>
                 <Cell ss:StyleID="s162"><Data ss:Type="String">' . $aprovado_flag . '</Data></Cell>';
         return $datarow;
     }
-
-    /**
-     * @return count of the fail in pendent exam group
+	/**
+     *@return count of the fail in pendent exam group
      */
-    public function getFailCountPriorYear($arrayValue, $pendent_exam) {
-        $pass_status = 1;
-        if ($pendent_exam != '') {
-            $xmlprimary_pendent = $this->getExamScoreGroup($arrayValue, $pendent_exam, false);
-            for ($i = 0; $i < count($xmlprimary_pendent->exam_score); $i++) {
-                if ((trim($xmlprimary_pendent->exam_score[$i]->marks) < 70) && (trim($xmlprimary_pendent->exam_score[$i]->marks) != '')) {
-                    $pass_status = 0;
-                }
-            }
-        }
-        return $pass_status;
+    public function getFailCountPriorYear($arrayValue, $pendent_exam)
+	{
+	    $pass_status = 1;
+		if ($pendent_exam != '') {
+			$xmlprimary_pendent = $this->getExamScoreGroup($arrayValue, $pendent_exam, false);
+			for ($i = 0; $i < count($xmlprimary_pendent->exam_score); $i++) {
+				if ((trim($xmlprimary_pendent->exam_score[$i]->marks) < 70) && (trim($xmlprimary_pendent->exam_score[$i]->marks) != '')) {
+					$pass_status = 0;
+				}
+			}
+		}
+		return $pass_status;
     }
 
     /**
-     * @return count of the fail in a current year semister
+     *@return count of the fail in a current year semister
      */
-    public function getFailCount($marks, $subjectArr, $examsArr, $arrayValue, $failCntpre) {
-        $failCnt = $failCntpre;
-        foreach ($subjectArr as $i => $k) {
-            $subject_code = explode("#", $k);
-            $subject_code = trim($subject_code[0]);
-            if ($subject_code <> "") {
-                $passed_currYear = 0;
-                $passed_currYear = $this->checkPassFailCurrentYear($marks, $subject_code, $examsArr, $arrayValue);
-                if ($failCnt > 2) {
-                    break;
-                } elseif (($passed_currYear > 0) && ($passed_currYear < 70)) {
-                    $failCnt++;
-                }
-            }
-        }
-        return $failCnt;
-    }
+	public function getFailCount($marks, $subjectArr, $examsArr, $arrayValue, $failCntpre)
+	{
+		$failCnt = $failCntpre;
+		foreach ($subjectArr as $i => $k) {
+			$subject_code = explode("#", $k);
+			$subject_code = trim($subject_code[0]);
+			if ($subject_code <> "") {
+				$passed_currYear = 0;
+				$passed_currYear = $this->checkPassFailCurrentYear($marks, $subject_code, $examsArr, $arrayValue);
+				if ($failCnt > 2) {
+					break;
+				} elseif (($passed_currYear > 0) && ($passed_currYear < 70)) {
+					$failCnt++;
+				}
+			}
+		}
+		return $failCnt;
+	}
 
-    /**
-     * function to get final result status of the detail xml sheet for the marks varification
-     * @return a final column for the xml sheet with grade status.
-     */
-    public function getFinalStatusDetail($arrayValue, $marks, $sem1_subjectArr, $sem2_subjectArr, $examsArr_sem1, $examsArr_sem2) {
+	/**
+	 * function to get final result status of the detail xml sheet for the marks varification
+	 * @return a final column for the xml sheet with grade status.
+	 */
+    public function getFinalStatusDetail($arrayValue, $marks, $sem1_subjectArr, $sem2_subjectArr, $examsArr_sem1, $examsArr_sem2)
+    {
         $datarow = '';
         $reprobado_flag = '';
         $aprovado_asig_pend_flag = '';
         $aprovado_flag = '';
         $absent = $this->getAttendance($arrayValue);
         // check for fail in cuurent year
-        $failCnt_current = 0;
-        $failCnt_current = $this->getFailCount($marks, $sem1_subjectArr, $examsArr_sem1, $arrayValue, $failCnt_current);
-        $failCnt_current = $this->getFailCount($marks, $sem2_subjectArr, $examsArr_sem2, $arrayValue, $failCnt_current);
-        //check for fail in prior year
-        $pass_in_sem1 = 1;
-        $pass_in_sem1 = $this->getFailCountPriorYear($arrayValue, $examsArr_sem1[7]);
+		$failCnt_current = 0;
+		$failCnt_current = $this->getFailCount($marks, $sem1_subjectArr, $examsArr_sem1, $arrayValue, $failCnt_current);
+		$failCnt_current = $this->getFailCount($marks, $sem2_subjectArr, $examsArr_sem2, $arrayValue, $failCnt_current);
+		//check for fail in prior year
+		$pass_in_sem1 = 1;
+		$pass_in_sem1 = $this->getFailCountPriorYear($arrayValue, $examsArr_sem1[7]);
 
-        $pass_in_sem2 = 1;
-        $pass_in_sem2 = $this->getFailCountPriorYear($arrayValue, $examsArr_sem2[7]);
+		$pass_in_sem2 = 1;
+		$pass_in_sem2 = $this->getFailCountPriorYear($arrayValue, $examsArr_sem2[7]);
 
-        if ($absent > 20 || $failCnt_current > 2 || (($pass_in_sem1 == 0) && ($pass_in_sem2 == 0))) {
-            $reprobado_flag = 'X';
-        } else if ($absent <= 20 && (($pass_in_sem1 == 1) || ($pass_in_sem2 == 1)) && ($failCnt_current == 1 || $failCnt_current == 2)) {
-            $aprovado_asig_pend_flag = 'X';
-        } else if ($absent <= 20 && (($pass_in_sem1 == 1) || ($pass_in_sem2 == 1)) && ($failCnt_current == 0)) {
-            $aprovado_flag = 'X';
-        }
+		if ($absent > 20 || $failCnt_current > 2 || (($pass_in_sem1 == 0) && ($pass_in_sem2 == 0))) {
+			$reprobado_flag = 'X';
+		} else if ($absent <= 20 && (($pass_in_sem1 == 1) || ($pass_in_sem2 == 1)) && ($failCnt_current == 1 || $failCnt_current == 2)) {
+			$aprovado_asig_pend_flag = 'X';
+		} else if ($absent <= 20 && (($pass_in_sem1 == 1) || ($pass_in_sem2 == 1)) && ($failCnt_current == 0)) {
+			$aprovado_flag = 'X';
+		}
 
         $datarow .= '<Cell ss:StyleID="s73"><Data ss:Type="String">' . $reprobado_flag . '</Data></Cell>
 					<Cell ss:StyleID="s71"><Data ss:Type="String">' . $aprovado_asig_pend_flag . '</Data></Cell>
@@ -502,9 +500,9 @@ class Fedena_Data {
         return $datarow;
     }
 
-    /**
-     * function to get pendent exams marks and add a column for pendent subjects and marks
-     */
+	/**
+	 * function to get pendent exams marks and add a column for pendent subjects and marks
+	 */
     public function getPendingTestStatusDetail($arrayValue, $examsArr) {
         $datarow = '';
         if ($examsArr[7] != '') {
@@ -522,37 +520,39 @@ class Fedena_Data {
                 $datarow .= '<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
 						<Cell ss:StyleID="s71"><Data ss:Type="Number"></Data></Cell>';
             }
-        } else {
-            $datarow .= '<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+        }else{
+		 		$datarow .= '<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
 						<Cell ss:StyleID="s71"><Data ss:Type="Number"></Data></Cell>';
-            $datarow .= '<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
+                $datarow .= '<Cell ss:StyleID="s71"><Data ss:Type="String"></Data></Cell>
 						<Cell ss:StyleID="s71"><Data ss:Type="Number"></Data></Cell>';
-        }
+		}
         return $datarow;
     }
 
-    /**
-     * function to check final, completivo and extraordinary exams marks
-     * @return calculated percent of the mark in a exam.
-     */
+	/**
+	 * function to check final, completivo and extraordinary exams marks
+	 * @return calculated percent of the mark in a exam.
+	 */
     public function checkPassFailCurrentYear($marks, $subject_code, $examsArr, $arrayValue) {
         $totalPrimaryMarks = 0;
+		$examsArr=$this->formingArrayTrim($examsArr);
+		$arrayValue['admission_no']= trim($arrayValue['admission_no']);
         //calculate average
-        $avgValCount = 0;
-        if ($marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] <> "") {
-            $avgValCount++;
-        }
-        if ($marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] <> "") {
-            $avgValCount++;
-        }
-        if ($marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] <> "") {
-            $avgValCount++;
-        }
-        if ($marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code] <> "") {
-            $avgValCount++;
-        }
-        if ($avgValCount == 0) {
-            $avgValCount = 1;
+		$avgValCount = 0;
+		if ($marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] <> "") {
+			$avgValCount++;
+		}
+		if ($marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] <> "") {
+			$avgValCount++;
+		}
+		if ($marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] <> "") {
+			$avgValCount++;
+		}
+		if ($marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code] <> "") {
+			$avgValCount++;
+		}
+        if($avgValCount==0){
+           $avgValCount = 1;
         }
         $avgPrimaryMarks = ($marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code]) / $avgValCount;
         //Calculate total marks for Primary Examination
@@ -561,14 +561,14 @@ class Fedena_Data {
         $totalPrimaryMarks = $avgPrimary + $ExamenFifth;
 
         $ExamMraksSixth = $marks[$arrayValue['admission_no']][$examsArr[5]][$subject_code];
-        if ($totalPrimaryMarks < 70 && $ExamMraksSixth <> "") {
+        if ($totalPrimaryMarks < 70 && $ExamMraksSixth<>"") {
             //Calculate totalCompletivo marks for Primary Examination
             $avgPrimary = $avgPrimaryMarks * 0.5;
             $ExamMraksSixth = $ExamMraksSixth * 0.5;
             $totalPrimaryMarks = $avgPrimary + $ExamMraksSixth;
 
             $ExamMraksseventh = $marks[$arrayValue['admission_no']][$examsArr[6]][$subject_code];
-            if ($totalPrimaryMarks < 70 && $ExamMraksseventh <> "") {
+            if ($totalPrimaryMarks < 70 && $ExamMraksseventh<>"") {
                 //Calculate total Extraordinario marks for Primary Examination
                 $avgPrimary = $avgPrimaryMarks * 0.3;
                 $ExamMraksseventh = $ExamMraksseventh * 0.7;
@@ -577,12 +577,13 @@ class Fedena_Data {
         }
         return $totalPrimaryMarks;
     }
-
     /**
-     * function to get student final score in a subject
-     * on the given average alogorith.
-     */
+	 * function to get student final score in a subject
+	 * on the given average alogorith.
+	 */
     public function getAvgMarks($marks, $subjectArr, $examsArr, $arrayValue) {
+	    $examsArr=$this->formingArrayTrim($examsArr);
+		$arrayValue['admission_no']=trim($arrayValue['admission_no']);
         $datarow = '';
         foreach ($subjectArr as $i => $k) {
             $subject_code = explode("#", $k);
@@ -605,8 +606,8 @@ class Fedena_Data {
                 if ($marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code] <> "") {
                     $avgValCount++;
                 }
-                if ($avgValCount == 0) {
-                    $avgValCount = 1;
+                if($avgValCount==0){
+				   $avgValCount = 1;
                 }
                 $avgPrimaryMarks = ($marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code]) / $avgValCount;
                 //Calculate total marks for Primary Examination
@@ -640,155 +641,171 @@ class Fedena_Data {
         }
         return $datarow;
     }
-
-    /**
-     * function to get student detail score in a subject.
-     * @retun detailed specification on the marks in a particular subject.
-     */
+	/**
+	 * function to get student detail score in a subject.
+	 * @retun detailed specification on the marks in a particular subject.
+	 */
     public function getMarksDetail($marks, $subject_code, $subject_name, $examsArr, $arrayValue) {
+	    
         $datarow = '';
+		$examsArr=$this->formingArrayTrim($examsArr);
         if ($subject_code <> "") {
-            $avgValCount = 0;
-            if ($marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] <> "") {
-                $avgValCount++;
-            }
-            if ($marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] <> "") {
-                $avgValCount++;
-            }
-            if ($marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] <> "") {
-                $avgValCount++;
-            }
-            if ($marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code] <> "") {
-                $avgValCount++;
-            }
-            if ($avgValCount == 0) {
-                $avgValCount = 1;
-            }
-            $initial_four_exam_avg = ($marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code]) / $avgValCount;
-            $promedio = round($initial_four_exam_avg, 1);
-            $promedio_70_percent = round($initial_four_exam_avg * (0.7), 1);
-            $final_exam_30_percent = round($marks[$arrayValue['admission_no']][$examsArr[4]][$subject_code] * (0.3), 1);
-            $final_grade = round(($promedio_70_percent + $final_exam_30_percent), 1);
-            if ($final_grade < 70) {
-                $completivo_exam = $marks[$arrayValue['admission_no']][$examsArr[5]][$subject_code];
-                $promedio_50_percent = round($initial_four_exam_avg * (0.5), 1);
-                $completivo_exam_50_percent = round($completivo_exam * (0.5), 1);
-                $completivo_grade = round(($promedio_50_percent + $completivo_exam_50_percent), 1);
-            } else {
-                $completivo_exam = '';
-                $promedio_50_percent = '';
-                $completivo_exam_50_percent = '';
-                $extraordinario_exam = '';
-                $completivo_grade = '';
-                $extraordinario_grade = '';
-            }
-            if ($completivo_grade < 70 && $completivo_grade > 0) {
-                $extraordinario_exam = $marks[$arrayValue['admission_no']][$examsArr[6]][$subject_code];
-                $promedio_30_percent = round($initial_four_exam_avg * (0.3), 1);
-                $extraordinario_exam_70_percent = round($extraordinario_exam * (0.7), 1);
-                $extraordinario_grade = round(($promedio_30_percent + $extraordinario_exam_70_percent), 1);
-            } else {
-                $extraordinario_exam = '';
-                $promedio_30_percent = '';
-                $extraordinario_exam_70_percent = '';
-                $extraordinario_grade = '';
-            }
-            $datarow .= '<Cell ss:StyleID="s777"><Data ss:Type="String">' . $subject_name . '</Data></Cell>
+				$avgValCount = 0;
+				if ($marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] <> "") {
+					$avgValCount++;
+				}
+				if ($marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] <> "") {
+					$avgValCount++;
+				}
+				if ($marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] <> "") {
+					$avgValCount++;
+				}
+				if ($marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code] <> "") {
+					$avgValCount++;
+				}
+				if($avgValCount==0){
+					$avgValCount = 1;
+				}
+				$initial_four_exam_avg = ($marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] + $marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code]) / $avgValCount;
+				$promedio = $initial_four_exam_avg;
+				$promedio_70_percent = $initial_four_exam_avg * (0.7);
+				$final_exam_30_percent = $marks[$arrayValue['admission_no']][$examsArr[4]][$subject_code] * (0.3);
+				$final_grade = $promedio_70_percent + $final_exam_30_percent;
+				if ($final_grade < 70) {
+					$completivo_exam = $marks[$arrayValue['admission_no']][$examsArr[5]][$subject_code];
+					$promedio_50_percent = $initial_four_exam_avg * (0.5);
+					$completivo_exam_50_percent = $completivo_exam * (0.5);
+					$completivo_grade = $promedio_50_percent + $completivo_exam_50_percent;
+				} else {
+					$completivo_exam = '';
+					$promedio_50_percent = '';
+					$completivo_exam_50_percent = '';
+					$extraordinario_exam = '';
+					$completivo_grade = '';
+					$extraordinario_grade = '';
+				}
+				if ($completivo_grade < 70 && $completivo_grade > 0) {
+					$extraordinario_exam = $marks[$arrayValue['admission_no']][$examsArr[6]][$subject_code];
+					$promedio_30_percent = $initial_four_exam_avg * (0.3);
+					$extraordinario_exam_70_percent = $extraordinario_exam * (0.7);
+					$extraordinario_grade = $promedio_30_percent + $extraordinario_exam_70_percent;
+				} else {
+					$extraordinario_exam = '';
+					$promedio_30_percent = '';
+					$extraordinario_exam_70_percent = '';
+					$extraordinario_grade = '';
+				}
+				$datarow .= '<Cell ss:StyleID="s777"><Data ss:Type="String">' . $subject_name . '</Data></Cell>
 							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . $marks[$arrayValue['admission_no']][$examsArr[0]][$subject_code] . '</Data></Cell>
 							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . $marks[$arrayValue['admission_no']][$examsArr[1]][$subject_code] . '</Data></Cell>
 							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . $marks[$arrayValue['admission_no']][$examsArr[2]][$subject_code] . '</Data></Cell>
 							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . $marks[$arrayValue['admission_no']][$examsArr[3]][$subject_code] . '</Data></Cell>
 							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . $marks[$arrayValue['admission_no']][$examsArr[4]][$subject_code] . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . $completivo_exam . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . $extraordinario_exam . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($promedio) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($promedio_70_percent) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($final_exam_30_percent) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($promedio_50_percent) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($completivo_exam_50_percent) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($promedio_30_percent) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($extraordinario_exam_70_percent) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($final_grade) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($completivo_grade) . '</Data></Cell>
-							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($extraordinario_grade) . '</Data></Cell>';
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($completivo_exam,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($extraordinario_exam,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($promedio,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($promedio_70_percent,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($final_exam_30_percent,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($promedio_50_percent,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($completivo_exam_50_percent,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($promedio_30_percent,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($extraordinario_exam_70_percent,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($final_grade,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($completivo_grade,2) . '</Data></Cell>
+							<Cell ss:StyleID="s71"><Data ss:Type="Number">' . round($extraordinario_grade,2) . '</Data></Cell>';
         }
         return $datarow;
     }
+	/**
+	 * @retun the marks for a given exam group.
+	 * This method is used for both pendent and regular exams.
+	 */
+    public function getExamScoreGroup($arrayValue, $gpName, $show_error = true)
+    {
+    	if (!$show_error) {
+		 	$url_score = $arrayValue['sclURL'] . '/api/exam_scores?access_token=' . $arrayValue['accToken'] . '&search[exam_exam_group_name_equals]=' . $gpName . '&search[exam_exam_group_batch_name_equals]=' . $arrayValue['batch'] . '&search[exam_exam_group_batch_course_code_equals]=' . $arrayValue['course'] . '&search[student_admission_no_equals]=' . $arrayValue['admission_no'];
+		 '<br>';
+		} else {
+	     	$url_score = $arrayValue['sclURL'] . '/api/exam_scores?access_token=' . $arrayValue['accToken'] . '&search[exam_exam_group_name_equals]=' . $gpName . '&search[exam_exam_group_batch_name_equals]=' . $arrayValue['batch'] . '&search[exam_exam_group_batch_course_code_equals]=' . $arrayValue['course'];
+		  '<br>';
+		}
+		$xmlinfo_score1 = $this->fedenaconnect($url_score);
+		if ($show_error) {
+			if (count($xmlinfo_score1->exam_score) == 0) {
+				//$_SESSION['errorMess'] = $this->langVar['lang_noExamErr'] . ' ' . $gpName;
+				//header("Location:index.php");
+				//exit();
+			}
+			return $xmlinfo_score1;
+		} else {
+			if (count($xmlinfo_score1->exam_score) == 0) {
+				return '';
+			}
+			return $xmlinfo_score1;
+		}
 
-    /**
-     * @retun the marks for a given exam group.
-     * This method is used for both pendent and regular exams.
-     */
-    public function getExamScoreGroup($arrayValue, $gpName, $show_error = true) {
-        if (!$show_error) {
-            $url_score = $arrayValue['sclURL'] . '/api/exam_scores?access_token=' . $arrayValue['accToken'] . '&search[exam_exam_group_name_equals]=' . $gpName . '&search[exam_exam_group_batch_name_equals]=' . $arrayValue['batch'] . '&search[exam_exam_group_batch_course_code_equals]=' . $arrayValue['course'] . '&search[student_admission_no_equals]=' . $arrayValue['admission_no'];
-        } else {
-            $url_score = $arrayValue['sclURL'] . '/api/exam_scores?access_token=' . $arrayValue['accToken'] . '&search[exam_exam_group_name_equals]=' . $gpName . '&search[exam_exam_group_batch_name_equals]=' . $arrayValue['batch'] . '&search[exam_exam_group_batch_course_code_equals]=' . $arrayValue['course'];
-        }
-        $xmlinfo_score1 = $this->fedenaconnect($url_score);
-        if ($show_error) {
-            if (count($xmlinfo_score1->exam_score) == 0) {
-                //$_SESSION['errorMess'] = $this->langVar['lang_noExamErr'] . ' ' . $gpName;
-                //header("Location:index.php");
-                //exit();
-            }
-            return $xmlinfo_score1;
-        } else {
-            if (count($xmlinfo_score1->exam_score) == 0) {
-                return '';
-            }
-            return $xmlinfo_score1;
-        }
     }
-
     /**
      * This method add 3 columns below to every choosed subject in report
      */
-    public function addThreeColsForSubject() {
-        $examName = '';
-        $examName = '<Cell ss:MergeDown="2" ss:StyleID="m56978088"><Data ss:Type="String">Final</Data></Cell>
+    public function addThreeColsForSubject()
+    {
+          $examName = '';
+		  $examName ='<Cell ss:MergeDown="2" ss:StyleID="m56978088"><Data ss:Type="String">Final</Data></Cell>
 					 <Cell ss:MergeDown="2" ss:StyleID="m56978088"><Data ss:Type="String">Completivo</Data></Cell>
 					 <Cell ss:MergeDown="2" ss:StyleID="m56978088"><Data ss:Type="String">Extraordinario</Data></Cell>';
-        return $examName;
+         return $examName;
     }
 
-    /**
-     * @return the absent percent in a batch duration
-     */
-    public function getAttendance($arrayValue) {
-        $absent = 0;
-        if ($arrayValue['batchStartDate'] <> "" && $arrayValue['batchEndDate'] <> "") {
-            $url_atten = $arrayValue['sclURL'] . '/api/attendances?access_token=' . $arrayValue['accToken'] . '&search[batch_name_equals]=' . $arrayValue['batch'] . '&search[month_date_gt]=' . $arrayValue['batchStartDate'] . '&search[month_date_lt]=' . $arrayValue['batchEndDate'] . '&search[student_admission_no_equals]=' . $arrayValue['admission_no'];
-            $xmlinfo_atten = $this->fedenaconnect($url_atten);
-            if (count($xmlinfo_atten->attendance) > 0) {
-                $absentAtten = count($xmlinfo_atten->attendance);
-            }
-            //calculate  the absent of student in percentage
-            if ($arrayValue['totalWorkingDay'] > 0) {
-                $absent = ($absentAtten * 100) / $arrayValue['totalWorkingDay'];
-            }
-        }
-        return $absent;
-    }
-
+	/**
+	 * @return the absent percent in a batch duration
+	 */
+	public function getAttendance($arrayValue) {
+		  $absent = 0;
+		  if ($arrayValue['batchStartDate'] <> "" && $arrayValue['batchEndDate'] <> "") {
+			  $url_atten = $arrayValue['sclURL'] . '/api/attendances?access_token=' . $arrayValue['accToken'] . '&search[batch_name_equals]=' . $arrayValue['batch'] . '&search[month_date_gt]=' . $arrayValue['batchStartDate'] . '&search[month_date_lt]=' . $arrayValue['batchEndDate'] . '&search[student_admission_no_equals]=' . $arrayValue['admission_no'];
+			  $xmlinfo_atten = $this->fedenaconnect($url_atten);
+			  if (count($xmlinfo_atten->attendance) > 0) {
+				  $absentAtten = count($xmlinfo_atten->attendance);
+			  }
+			  //calculate  the absent of student in percentage
+			  if($arrayValue['totalWorkingDay'] > 0) {
+				 $absent = ($absentAtten * 100) / $arrayValue['totalWorkingDay'];
+			  }
+		  }
+		  return $absent;
+	}
     /**
      * To forming  in array from post data
      * and replace the blank values and convert special character in utf8
      */
-    public function formingArray($dataArr) {
-        $newArr = array();
-        foreach ($dataArr as $key => $val) {
-            if (trim($val) <> "") {
-                $newArr[] = $this->convert_to_utf8(trim($val));
-            }
-        }
-        return $newArr;
-    }
+	public function formingArrayTrim($dataArr)
+	{
+	    $newArr = array();
+		foreach ($dataArr as $key => $val) {
+			if (trim($val) <> "") {
+				$newArr[] = trim($val);
+			}
+		}
+		return $newArr;
 
-    /**
-     * CURL for Fedena API access
-     */
-    public function fedenaconnect($service_url, $method = 'GET') {
+	}
+	public function formingArray($dataArr)
+	{
+	    $newArr = array();
+		foreach ($dataArr as $key => $val) {
+			if ($val <> "") {
+				$newArr[] = $this->convert_to_utf8($val);
+			}
+		}
+		return $newArr;
+
+	}
+	/**
+	 * CURL for Fedena API access
+	 */
+    public function fedenaconnect($service_url, $method = 'GET')
+    {
         try {
 
             $curl = curl_init($service_url);
@@ -821,72 +838,69 @@ class Fedena_Data {
             exit();
         }
     }
-
-    /**
+	/**
      * find the max depth of a multidimention array
      */
-    public function get_array_depth($arr, $n = 0) {
-        $max = $n;
-        foreach ($arr as $item) {
-            if (is_array($item)) {
-                $max = max($max, $this->get_array_depth($item, $n + 1));
-            }
-        }
-        return $max;
-    }
-
+	public function get_array_depth($arr, $n = 0) {
+		$max = $n;
+		foreach ($arr as $item) {
+			if (is_array($item)) {
+				$max = max($max, $this->get_array_depth($item, $n + 1));
+			}
+		}
+		return $max;
+	}
     /**
      * conver special charter in its equivalent utf8
      */
     public function convert_to_utf8($text) {
-        $map = array(
-            chr(0x8A) => chr(0xA9),
-            chr(0x8C) => chr(0xA6),
-            chr(0x8D) => chr(0xAB),
-            chr(0x8E) => chr(0xAE),
-            chr(0x8F) => chr(0xAC),
-            chr(0x9C) => chr(0xB6),
-            chr(0x9D) => chr(0xBB),
-            chr(0xA1) => chr(0xB7),
-            chr(0xA5) => chr(0xA1),
-            chr(0xBC) => chr(0xA5),
-            chr(0x9F) => chr(0xBC),
-            chr(0xB9) => chr(0xB1),
-            chr(0x9A) => chr(0xB9),
-            chr(0xBE) => chr(0xB5),
-            chr(0x9E) => chr(0xBE),
-            chr(0x80) => '&euro;',
-            chr(0x82) => '&sbquo;',
-            chr(0x84) => '&bdquo;',
-            chr(0x85) => '&hellip;',
-            chr(0x86) => '&dagger;',
-            chr(0x87) => '&Dagger;',
-            chr(0x89) => '&permil;',
-            chr(0x8B) => '&lsaquo;',
-            chr(0x91) => '&lsquo;',
-            chr(0x92) => '&rsquo;',
-            chr(0x93) => '&ldquo;',
-            chr(0x94) => '&rdquo;',
-            chr(0x95) => '&bull;',
-            chr(0x96) => '&ndash;',
-            chr(0x97) => '&mdash;',
-            chr(0x99) => '&trade;',
-            chr(0x9B) => '&rsquo;',
-            chr(0xA6) => '&brvbar;',
-            chr(0xA9) => '&copy;',
-            chr(0xAB) => '&laquo;',
-            chr(0xAE) => '&reg;',
-            chr(0xB1) => '&plusmn;',
-            chr(0xB5) => '&micro;',
-            chr(0xB6) => '&para;',
-            chr(0xB7) => '&middot;',
-            chr(0xBB) => '&raquo;',
-        );
-        return html_entity_decode(mb_convert_encoding(strtr($text, $map), 'UTF-8', 'ISO-8859-1'), ENT_QUOTES, 'UTF-8');
-    }
-
-    public function mb_convert($str) {
-        return mb_convert_encoding(trim($str), "iso-8859-1", "utf-8");
+	    $map = array(
+	        chr(0x8A) => chr(0xA9),
+	        chr(0x8C) => chr(0xA6),
+	        chr(0x8D) => chr(0xAB),
+	        chr(0x8E) => chr(0xAE),
+	        chr(0x8F) => chr(0xAC),
+	        chr(0x9C) => chr(0xB6),
+	        chr(0x9D) => chr(0xBB),
+	        chr(0xA1) => chr(0xB7),
+	        chr(0xA5) => chr(0xA1),
+	        chr(0xBC) => chr(0xA5),
+	        chr(0x9F) => chr(0xBC),
+	        chr(0xB9) => chr(0xB1),
+	        chr(0x9A) => chr(0xB9),
+	        chr(0xBE) => chr(0xB5),
+	        chr(0x9E) => chr(0xBE),
+	        chr(0x80) => '&euro;',
+	        chr(0x82) => '&sbquo;',
+	        chr(0x84) => '&bdquo;',
+	        chr(0x85) => '&hellip;',
+	        chr(0x86) => '&dagger;',
+	        chr(0x87) => '&Dagger;',
+	        chr(0x89) => '&permil;',
+	        chr(0x8B) => '&lsaquo;',
+	        chr(0x91) => '&lsquo;',
+	        chr(0x92) => '&rsquo;',
+	        chr(0x93) => '&ldquo;',
+	        chr(0x94) => '&rdquo;',
+	        chr(0x95) => '&bull;',
+	        chr(0x96) => '&ndash;',
+	        chr(0x97) => '&mdash;',
+	        chr(0x99) => '&trade;',
+	        chr(0x9B) => '&rsquo;',
+	        chr(0xA6) => '&brvbar;',
+	        chr(0xA9) => '&copy;',
+	        chr(0xAB) => '&laquo;',
+	        chr(0xAE) => '&reg;',
+	        chr(0xB1) => '&plusmn;',
+	        chr(0xB5) => '&micro;',
+	        chr(0xB6) => '&para;',
+	        chr(0xB7) => '&middot;',
+	        chr(0xBB) => '&raquo;',
+	    );
+	    return html_entity_decode(mb_convert_encoding(strtr($text, $map), 'UTF-8', 'ISO-8859-1'), ENT_QUOTES, 'UTF-8');
+	}
+      public function mb_convert($str){
+       return mb_convert_encoding(trim($str),"iso-8859-1","utf-8");
     }
 
 }
