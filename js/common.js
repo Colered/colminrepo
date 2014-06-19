@@ -463,13 +463,13 @@ var step6_validation = function() {
         $('.form-error2').hide();
         $(".rhino-active-bullet").removeClass("step-error").addClass("step-success");
         $(".rhino-next").hide();
-        //$('.form-submit').show();
         if($('#multiForm').submit()){
 			$(".loading-img").show();
 			$(".infotext").show();
 	     }
 		$('.rhino-next').trigger('click');
 		$('.form-submit').hide();
+		$(".rhino-prev").hide();
 	}else
 	{
 	  $(".rhino-active-bullet").removeClass("step-success").addClass("step-error");   	
@@ -615,7 +615,8 @@ function showAreasStep5Parent(){
 }
 
 function showAreasStep6Parent(){
-	   var chkbxIdStep5 = '';
+	    $(".rhino-prev").show();
+	    var chkbxIdStep5 = '';
         $('.chklevel:checked').each(function() {
           chkbxIdStep5 += $(this).val() + "#";
         });
