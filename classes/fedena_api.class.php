@@ -40,7 +40,7 @@ class Fedena_Data {
 			$sem2_subjectArrNew = $this->formingArray($sem2_subjectArr);
 			$sem1_examsArrNew = $this->formingArray($sem1_examsArr);
 			$sem2_examsArrNew = $this->formingArray($sem2_examsArr);
-			// end reform
+			// end reform 
 		} else {
 			$_SESSION['errorMess'] = $this->langVar['lang_postErr'];
 			header("Location:index.php");
