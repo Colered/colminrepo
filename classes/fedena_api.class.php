@@ -240,7 +240,7 @@ class Fedena_Data {
                     $indexdatavar = "ss:Index='20'";
                 }
                 $marksRows .= '<Row ' . $indexdatavar . ' ><Cell ss:Index="2" ss:StyleID="s153"><Data ss:Type="Number" x:Ticked="1">' . $srno . '</Data></Cell>
-                                        <Cell ss:StyleID="s777"><Data ss:Type="String">' . $srow->student_name . '</Data></Cell>';
+                                        <Cell ss:StyleID="s777"><Data ss:Type="String">' . $srow->student_name . '('.$srow->admission_no.')</Data></Cell>';
                 $arrayValue['admission_no'] = trim($srow->admission_no);
                 //writing marks for first sem
                 $marksRows .= $this->getAvgMarks($marks, $sem1_subjectArr, $sem1_examsArr, $arrayValue);
@@ -288,7 +288,7 @@ class Fedena_Data {
                 // get final results 2 columns
                 $marksRowsPendent_sem2 = $this->getPendingTestStatusDetail($arrayValue, $sem2_examsArr);
                 for ($i = 0; $i < $sem_subject_count; $i++) {
-                    $marksRows .= '<Row ss:AutoFitHeight="0"><Cell ss:StyleID="s70"/><Cell ss:StyleID="s777"><Data ss:Type="String">' . $srow->student_name . '</Data></Cell>';
+                    $marksRows .= '<Row ss:AutoFitHeight="0"><Cell ss:StyleID="s70"/><Cell ss:StyleID="s777"><Data ss:Type="String">' . $srow->student_name . '('.$srow->admission_no.')</Data></Cell>';
                     //for first sem subject
                     $sem1_splitArr = $sem1_subjectArr[$i];
                     $sem1_splitArr = explode("#", $sem1_splitArr);
@@ -370,6 +370,7 @@ class Fedena_Data {
                 }
             }
         }
+		// exam score for sem2
         for ($z = 0; $z < $sem2_counts; $z++) {
             $exam_name = $examsArr_sem2[$z];
             if ($exam_name <> "") {
@@ -671,7 +672,7 @@ class Fedena_Data {
 				$promedio_70_percent = $initial_four_exam_avg * (0.7);
 				$final_exam_30_percent = $marks[$arrayValue['admission_no']][$examsArr[4]][$subject_code] * (0.3);
 				$final_grade = $promedio_70_percent + $final_exam_30_percent;
-				if ($final_grade < 70) {
+				if ($final_grade < 70 && $examsArr['5']!="") {
 					$completivo_exam = $marks[$arrayValue['admission_no']][$examsArr[5]][$subject_code];
 					$promedio_50_percent = $initial_four_exam_avg * (0.5);
 					$completivo_exam_50_percent = $completivo_exam * (0.5);
@@ -684,7 +685,7 @@ class Fedena_Data {
 					$completivo_grade = '';
 					$extraordinario_grade = '';
 				}
-				if ($completivo_grade < 70 && $completivo_grade > 0) {
+				if ($completivo_grade < 70 && $completivo_grade > 0 && $examsArr['6']!="") {
 					$extraordinario_exam = $marks[$arrayValue['admission_no']][$examsArr[6]][$subject_code];
 					$promedio_30_percent = $initial_four_exam_avg * (0.3);
 					$extraordinario_exam_70_percent = $extraordinario_exam * (0.7);

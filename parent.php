@@ -83,8 +83,11 @@ require_once('header.php');
 					</div>
                 </div>
                 <div class="form-step" style="display:none">
-                    <div class="form-text">
+				    <div class="form-text">
                         <div class="numbers"><img src="images/4.png"  /></div><div class="num-text"> <?php echo $lang_slctStuParent; ?></div>
+                    </div>
+					 <div class="form-msg">
+                        <div class="msg"><?php echo $lang_ckbStuReq; ?></div>
                     </div>
 					<div  style="margin-bottom:15px;margin-left: 5px;" class="stuDetail">
 						<input type="checkbox" id="ckbCheckAllStu" value="Select all" ><strong><?php echo $lang_slctAllParent;?></strong></input>
@@ -97,7 +100,9 @@ require_once('header.php');
                     <div class="form-text">
                         <div class="numbers"><img src="images/5.png"  /></div><div class="num-text"> <?php echo $lang_form5txtParent; ?></div>
                     </div>
-
+					<div class="form-msg">
+                        <div class="msg"><?php echo $lang_ckbStuReq; ?></div>
+                    </div>
                     <div class="rowleft">
                         <div class="form-text"><?php echo $lang_semOne ?></div>
 						<div class="sem1ExamGrp" style="margin-bottom:15px">
@@ -151,21 +156,29 @@ require_once('header.php');
                     <div class="form-text">
                         <div class="numbers"><img width="40" height="45" src="images/6.png"  /></div><div class="num-text"> <?php echo $lang_stp6comntParent; ?></div>
                     </div>
-
+					<div class="form-msg">
+                        <div class="msg"><?php echo $lang_ckbStuReq; ?></div>
+                    </div>
+					
                     <div class="rowleft">
+					
 					    <div class="form-text"><?php echo $lang_semOne ?></div>
 						<div class="sem1subject" style="margin-bottom:15px">
 						  <input type="checkbox" id="ckbCheckAllSem1Subj" value="Select all" onclick="removeError();" ><strong><?php echo $lang_slctAllParent;?></strong></input>
 					    </div>
 						<div class="subjectSem1 parentSub"></div>
+						
 					</div>
                     <div class="rowleft">
+					
                         <div class="form-text"><?php echo $lang_semTwo ?></div>
 						<div class="sem2subject" style="margin-bottom:15px">
 						  <input type="checkbox" id="ckbCheckAllSem2Subj" value="Select all"  onclick="removeError();"><strong><?php echo $lang_slctAllParent;?></strong></input>
 					    </div>
 						<div class="subjectSem2 parentSub" ></div>
+					
                     </div>
+					
 					<div class="form-error2"></div>
                 </div>
 				

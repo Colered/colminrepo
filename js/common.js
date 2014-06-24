@@ -265,9 +265,7 @@ var step3_validation = function() {
 		   showAreasStep5Parent();
 		}
 		//trigger to next step
-         if($('.rhino-next').trigger('click'))
-		{   
-		   // alert('yes');
+         if($('.rhino-next').trigger('click')){   
 		    var $ministryDiv=$('#ministry_report');
 		    if($ministryDiv.length){
 			 errorMinstryStep4();
@@ -434,7 +432,6 @@ var step5_validation = function() {
     }
 };
 var step6_validation = function() {
- 
     var err=0;
 	var clsLvlVal=$("#class_level option:selected").val();
 	if(clsLvlVal==101 || clsLvlVal==102 || clsLvlVal==103 || clsLvlVal==104 || clsLvlVal==1 || clsLvlVal==2){
@@ -457,6 +454,7 @@ var step6_validation = function() {
 	}
 	}
 	if(err==0){
+		
 		$('.form-error-stp6').hide();
 	    $("#rhino-item6").show();
 		$("#rhino-item0,#rhino-item1, #rhino-item2, #rhino-item3, #rhino-item4","#rhino-item5").hide();
@@ -467,6 +465,7 @@ var step6_validation = function() {
 			$(".loading-img").show();
 			$(".infotext").show();
 	     }
+		
 		$('.rhino-next').trigger('click');
 		$('.form-submit').hide();
 		$(".rhino-prev").hide();
@@ -642,6 +641,24 @@ function showAreasStep6Parent(){
 			}
 		});
 	}else{
+		if ($("input[type='checkbox'][name='s2ckbe[]']:checked").length==0){
+		    $("input.ckbSubjSem2,").attr("disabled", true);
+			$("input#ckbCheckAllSem2Subj").attr("disabled", true);
+			
+	     }
+		 else{
+			
+			 $("input#ckbCheckAllSem2Subj").removeAttr("disabled");
+			 $("input.ckbSubjSem2").removeAttr("disabled"); 
+		}
+	    if ($("input[type='checkbox'][name='s1ckbe[]']:checked").length==0){
+		    $("input.ckbSubjSem1").attr("disabled", true);
+			$("input#ckbCheckAllSem1Subj").attr("disabled", true);
+	     }
+		 else{
+			 $("input#ckbCheckAllSem1Subj").removeAttr("disabled");
+			 $("input.ckbSubjSem1").removeAttr("disabled");
+		}
 		$("#forLevelAbove6").show();
 		$("#forLevelbelow6").hide();
 	}
@@ -1061,7 +1078,13 @@ $(document).ready(function(){
 			$(".form-error1").hide();
 			
 		});
-		
+	$(document).on('click', ".chkClsStudent", function() {
+       if($(".chkClsStudent").length == $(".chkClsStudent:checked").length) {
+            $("#ckbCheckAllStu").attr("checked", "checked");
+        } else {
+            $("#ckbCheckAllStu").removeAttr("checked");
+        }
+    });	
 	$('#ckbCheckAllSem1ExamGrp').click(function(event) {  
 		if(this.checked) { 
 			$('.ckbSem1ExmGrp').each(function() { 
@@ -1079,6 +1102,13 @@ $(document).ready(function(){
 			});         
 		}
 	});
+	$(document).on('click', ".ckbSem1ExmGrp", function() {
+       if($(".ckbSem1ExmGrp").length == $(".ckbSem1ExmGrp:checked").length) {
+            $("#ckbCheckAllSem1ExamGrp").attr("checked", "checked");
+        } else {
+            $("#ckbCheckAllSem1ExamGrp").removeAttr("checked");
+        }
+    });	
 	$('#ckbCheckAllSem2ExamGrp').click(function(event) {   
 		if(this.checked) { 
 			$('.ckbSem2ExmGrp').each(function() { 
@@ -1095,16 +1125,53 @@ $(document).ready(function(){
 				$('.slctSem2Exam').removeClass('errorDisplay');
 			});         
 		}
-});
-		$("#ckbCheckAllSem1Subj").click(function () {
+     });
+	
+	$(document).on('click', ".ckbSem2ExmGrp", function() {
+         if($(".ckbSem2ExmGrp").length == $(".ckbSem2ExmGrp:checked").length) {
+            $("#ckbCheckAllSem2ExamGrp").attr("checked", "checked");
+          } else {
+            $("#ckbCheckAllSem2ExamGrp").removeAttr("checked");
+        }
+     });	
+	$("#ckbCheckAllSem1Subj").click(function () {
 			$(".ckbSubjSem1").prop('checked', $(this).prop('checked'));
 			$(".form-error2").hide();
-		});
-		$("#ckbCheckAllSem2Subj").click(function () {
+	 });
+	$(document).on('click', ".ckbSubjSem1", function() {
+         if($(".ckbSubjSem1").length == $(".ckbSubjSem1:checked").length) {
+            $("#ckbCheckAllSem1Subj").attr("checked", "checked");
+         } else {
+            $("#ckbCheckAllSem1Subj").removeAttr("checked");
+        }
+    });	
+	$("#ckbCheckAllSem2Subj").click(function () {
 			$(".ckbSubjSem2").prop('checked', $(this).prop('checked'));
 			$(".form-error2").hide();
-		});
-	}
+	});
+	$(document).on('click', ".ckbSubjSem2", function() {
+         if($(".ckbSubjSem2").length == $(".ckbSubjSem2:checked").length) {
+            $("#ckbCheckAllSem2Subj").attr("checked", "checked");
+        } else {
+            $("#ckbCheckAllSem2Subj").removeAttr("checked");
+       }
+    });	
+	
+	$(document).on('click', ".ckbClsGrd", function() {
+       if($(".ckbClsGrd").length == $(".ckbClsGrd:checked").length) {
+            $("#ckbselctAllGrdVal").attr("checked", "checked");
+        } else {
+            $("#ckbselctAllGrdVal").removeAttr("checked");
+        }
+    });	
+	$(document).on('click', ".ckbclsGrdStp6", function() {
+       if($(".ckbclsGrdStp6").length == $(".ckbclsGrdStp6:checked").length) {
+            $("#ckbselctAllGrdValStep6").attr("checked", "checked");
+        } else {
+            $("#ckbselctAllGrdValStep6").removeAttr("checked");
+        }
+    });	
+   }
 });
 function showExamGps(chkID, dropdID){
 	$checkIdVal = '#'+chkID;

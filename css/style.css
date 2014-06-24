@@ -131,6 +131,12 @@ ul li {
 	line-height:35px;
 }
 .form-text img{ top:10px;} 
+.form-msg
+{
+    color: #717171;
+	margin-left:9px;
+	margin-bottom:9px;
+}
 .form-right{
 	float: left;
 	width: 214px;
@@ -510,11 +516,11 @@ background-repeat:no-repeat;
 .checkboxs{float:left;}
 .logo img{ border:none!important;}
 .show-download-parent{text-align:center; padding-top:20px;}
-.subjectSem2{ max-height: 358px;
-    overflow: auto;
+.subjectSem2{ height: 296px;
+	overflow: auto;
     width: 405px;}
-.subjectSem1{max-height: 358px;
-    overflow: auto;
+.subjectSem1{height: 296px;
+	overflow: auto;
     width: 440px;}
 .stdDataLevel{ min-width: 300px; margin-left:5px; margin-bottom:8px;}
 .allData{  height: 350px;
